@@ -15,8 +15,9 @@ namespace Magic8BallApplication
 
     class Program
     {
-
+        // The magic 8-Ball talks to you!!!
         private static SpeechSynthesizer synth = new SpeechSynthesizer();
+
 
         static void Main(string[] args)
         {
@@ -28,6 +29,7 @@ namespace Magic8BallApplication
             // Create a random object.
             Random randomObject = new Random();
 
+            // Several answers in case the user hits "enter" without asking a question
             List<string> noQuestionAsked = new List<string>();
             noQuestionAsked.Add("You need to type a question, genious!");
             noQuestionAsked.Add("Can't give you an answer if you don't ask a question!");
@@ -45,22 +47,29 @@ namespace Magic8BallApplication
             {
                 string questionString = GetQuestionFromUser();
 
+
                 // Make the computer pause for between 1 and 5 seconds before
                 // giving an answer...
-                /*int numberOfSecondsToSleep = randomObject.Next(5) + 1;
+                /*
+                int numberOfSecondsToSleep = randomObject.Next(5) + 1;
                 Console.WriteLine("Thinking about your answer, stand by...");
                 Thread.Sleep(numberOfSecondsToSleep * 1000);
-                I did not like this function but I kept it to learn.
+                
+                I did not like this function but I kept it for learning purposes.
                  */
+                
 
+                // If user doesn't ask a question and still hits enter a random respons will be given.
                 string noQuestionMessage = noQuestionAsked[randAnswer.Next(4)];
 
+                // Checks wether anything was typed or not.
                 if (questionString.Length == 0)
                 {
                     Console.WriteLine(noQuestionMessage);
                     synth.Speak(noQuestionMessage);
                     continue;
                 }
+
                 // See if the user typed 'quit' as the question.
                 if(questionString.ToLower() == "quit")
                 {
